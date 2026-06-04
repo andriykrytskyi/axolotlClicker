@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axolotl Clicker</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(#fc7ddc,#f83838);
+    text-align:center;
+    color:white;
+}
+
+h1{
+    margin-top:20px;
+}
+
+#score{
+    font-size:32px;
+    font-weight:bold;
+    margin:20px;
+}
+
+#axolotl{
+    font-size:180px;
+    cursor:pointer;
+    user-select:none;
+    transition:0.1s;
+}
+
+#axolotl:active{
+    transform:scale(0.9);
+}
+
+.shop{
+    background:rgba(255,255,255,0.15);
+    width:320px;
+    margin:20px auto;
+    padding:20px;
+    border-radius:20px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.bubble{
+    position:absolute;
+    font-size:30px;
+    pointer-events:none;
+    animation:floatUp 1s forwards;
+}
+
+@keyframes floatUp{
+    from{
+        opacity:1;
+        transform:translateY(0);
+    }
+    to{
+        opacity:0;
+        transform:translateY(-100px);
+    }
+}
+</style>
+</head>
+<body>
+
+<h1>🐸 Axolotl Clicker</h1>
+
+<div id="score">0 🫧</div>
+
+<div id="axolotl">🦎</div>
+
+<div class="shop">
+    <h2>Магазин</h2>
+
+    <button onclick="buyClickUpgrade()">
+        Водорості (+1 за клік) — <span id="clickCost">50</span>
+    </button>
+
+    <button onclick="buyAuto()">
+        Малюк-аксолотль (+1/сек) — <span id="autoCost">100</span>
+    </button>
+
+    <p>За клік: <span id="perClick">1</span></p>
+    <p>За секунду: <span id="perSecond">0</span></p>
+</div>
+
+<script>
+let bubbles = 0;
+
+let clickPower = 1;
+let autoPower = 0;
+
+let clickCost = 50;
+let autoCost = 100;
+
+const scoreEl = document.getElementById("score");
+
+function updateUI(){
+    scoreEl.textContent = bubbles + " 🫧";
+
+    document.getElementById("clickCost").textContent = clickCost;
+    document.getElementById("autoCost").textContent = autoCost;
+
+    document.getElementById("perClick").textContent = clickPower;
+    document.getElementById("perSecond").textContent = autoPower;
+}
+
+document.getElementById("axolotl").addEventListener("click", e => {
+
+    bubbles += clickPower;
+    updateUI();
+
+    const plus = document.createElement("div");
+    plus.className = "bubble";
+    plus.innerHTML = "+" + clickPower + "🫧";
+
+    plus.style.left = e.pageX + "px";
+    plus.style.top = e.pageY + "px";
+
+    document.body.appendChild(plus);
+
+    setTimeout(()=>{
+        plus.remove();
+    },1000);
+});
+
+function buyClickUpgrade(){
+
+    if(bubbles < clickCost) return;
+
+    bubbles -= clickCost;
+
+    clickPower += 1;
+
+    clickCost = Math.floor(clickCost * 1.8);
+
+    updateUI();
+}
+
+function buyAuto(){
+
+    if(bubbles < autoCost) return;
+
+    bubbles -= autoCost;
+
+    autoPower += 1;
+
+    autoCost = Math.floor(autoCost * 2);
+
+    updateUI();
+}
+
+setInterval(()=>{
+    bubbles += autoPower;
+    updateUI();
+},1000);
+
+updateUI();
+</script>
+
+</body>
+</html>
