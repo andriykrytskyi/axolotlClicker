@@ -78,18 +78,18 @@ button{
 <div id="axolotl">🦎</div>
 
 <div class="shop">
-    <h2>Магазин</h2>
+    <h2>Shop</h2>
 
     <button onclick="buyClickUpgrade()">
-        Водорості (+1 за клік) — <span id="clickCost">50</span>
+        Algae (+1 per click) — <span id="clickCost">50</span>
     </button>
 
     <button onclick="buyAuto()">
-        Малюк-аксолотль (+1/сек) — <span id="autoCost">100</span>
+        Baby-axolotl (+1/sec) — <span id="autoCost">100</span>
     </button>
 
-    <p>За клік: <span id="perClick">1</span></p>
-    <p>За секунду: <span id="perSecond">0</span></p>
+    <p>Per click: <span id="perClick">1</span></p>
+    <p>Per second: <span id="perSecond">0</span></p>
 </div>
 
 <script>
@@ -164,6 +164,9 @@ setInterval(()=>{
 },1000);
 
 updateUI();
+
+
+
 </script>
 
 </body>
