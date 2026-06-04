@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Axolotl Clicker</title>
+<title>Lizard Clicker</title>
 
 <style>
 body{
     margin:0;
     font-family:Arial,sans-serif;
-    background:linear-gradient(#7dfc94,#78f838);
+    background:linear-gradient(#fc7d7d,#f83b38);
     text-align:center;
     color:white;
 }
@@ -164,6 +164,22 @@ setInterval(()=>{
 },1000);
 
 updateUI();
+<script>function loadGameByName(nameToLoad) {
+    const saveKey = "gameSave_" + nameToLoad;
+    const savedData = localStorage.getItem(saveKey);
+    
+    if (savedData) {
+        gameState = JSON.parse(savedData);
+        console.log(`Прогрес гравця ${nameToLoad} успішно завантажено!`);
+    } else {
+        console.log(`Збережень для імені "${nameToLoad}" не знайдено. Створюємо новий профіль.`);
+        gameState.playerName = nameToLoad;
+        gameState.level = 1;
+        gameState.coins = 0;
+    }
+}
+
+
 
 
 
