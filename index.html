@@ -92,78 +92,7 @@ button{
     <p>Per second: <span id="perSecond">0</span></p>
 </div>
 
-<script>
-let bubbles = 0;
 
-let clickPower = 1;
-let autoPower = 0;
-
-let clickCost = 50;
-let autoCost = 100;
-
-const scoreEl = document.getElementById("score");
-
-function updateUI(){
-    scoreEl.textContent = bubbles + " 🫧";
-
-    document.getElementById("clickCost").textContent = clickCost;
-    document.getElementById("autoCost").textContent = autoCost;
-
-    document.getElementById("perClick").textContent = clickPower;
-    document.getElementById("perSecond").textContent = autoPower;
-}
-
-document.getElementById("axolotl").addEventListener("click", e => {
-
-    bubbles += clickPower;
-    updateUI();
-
-    const plus = document.createElement("div");
-    plus.className = "bubble";
-    plus.innerHTML = "+" + clickPower + "🫧";
-
-    plus.style.left = e.pageX + "px";
-    plus.style.top = e.pageY + "px";
-
-    document.body.appendChild(plus);
-
-    setTimeout(()=>{
-        plus.remove();
-    },1000);
-});
-
-function buyClickUpgrade(){
-
-    if(bubbles < clickCost) return;
-
-    bubbles -= clickCost;
-
-    clickPower += 1;
-
-    clickCost = Math.floor(clickCost * 1.8);
-
-    updateUI();
-}
-
-function buyAuto(){
-
-    if(bubbles < autoCost) return;
-
-    bubbles -= autoCost;
-
-    autoPower += 1;
-
-    autoCost = Math.floor(autoCost * 2);
-
-    updateUI();
-}
-
-setInterval(()=>{
-    bubbles += autoPower;
-    updateUI();
-},1000);
-
-updateUI();
 
 
 </body>
