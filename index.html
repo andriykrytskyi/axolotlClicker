@@ -164,26 +164,7 @@ setInterval(()=>{
 },1000);
 
 updateUI();
-<script>function loadGameByName(nameToLoad) {
-    const saveKey = "gameSave_" + nameToLoad;
-    const savedData = localStorage.getItem(saveKey);
-    
-    if (savedData) {
-        gameState = JSON.parse(savedData);
-        console.log(`Прогрес гравця ${nameToLoad} успішно завантажено!`);
-    } else {
-        console.log(`Збережень для імені "${nameToLoad}" не знайдено. Створюємо новий профіль.`);
-        gameState.playerName = nameToLoad;
-        gameState.level = 1;
-        gameState.coins = 0;
-    }
-}
 
-
-
-
-
-</script>
 
 </body>
 </html>
